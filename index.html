@@ -1,0 +1,889 @@
+<!-- Header -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMMMS App | Truck Maintenance Monitoring Management Systems Nigeria</title>
+    <link rel="icon" type="image/x-icon" href="/images/tmmms-logo.svg">
+
+    <!-- Tailwind cdn -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="/css/cdn.tailwindcss.com.3.4.5.js"></script> -->
+
+    <!-- Flowbite cdn -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+    <!-- Fontawesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
+    <script>
+        alertify.set('notifier','position', 'top-right')
+    </script>
+
+
+
+    <!-- Start Table -->
+	<!--Regular Datatables CSS-->
+	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+	<!--Responsive Extension Datatables CSS-->
+	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <!-- End Table -->
+
+</head>
+
+<body class="w-full dark:bg-gray-600">
+<!-- End Header -->
+
+
+<!-- {{----}} Is for laravel PHP -->
+<!-- Alertify Js -->
+<script>
+
+    // Position
+    alertify.set('notifier','position', 'top-right');
+    // Suceess
+    alertify.success('Good!');
+    // Error
+    alertify.error('There was an error!');
+
+</script>
+
+
+
+
+<!-- Navbar -->
+<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <div class="px-3 py-3 lg:px-5 lg:pl-3">
+        <div class="flex items-center justify-between">
+
+            <div class="flex items-center justify-start rtl:justify-end">
+                <!-- Toggle Button -->
+                <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar"
+                    aria-controls="logo-sidebar" type="button"
+                    class="inline-flex items-center p-2 mx-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    <span class="sr-only">Open sidebar</span>
+                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd" fill-rule="evenodd"
+                            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+                        </path>
+                    </svg>
+                </button>
+
+                <!-- Logo -->
+                <a href="{{ route('dashboard') }}"
+                    class="flex items-center shadow p-2 px-3 text-xl md:px-8 md:text-2xl text-gray-100 rounded-lg
+                    dark:text-white dark:hover:bg-gray-700 group sm:text-center
+                    hover:bg-[#0828b9] bg-[#0828ad] text-blue-100 font-bold leading">
+                    <img src="{{ asset('images/tmmms-logo-white.png') }}" alt="Truck" class="w-6 md:w-8 rounded-full m-1">
+                    <span class="flex-1 ms-3 whitespace-nowrap dark:text-white pe-1">TMMMS</span>
+                </a>
+            </div>
+
+
+            <!-- User Menu -->
+            <div class="flex items-center">
+                <div class="flex items-center ms-3">
+                    <div>
+                        <button type="button"
+                            class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                            aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                            <span class="sr-only">Open user menu</span>
+                            <img class="w-8 h-8 rounded-full"
+                                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                                alt="user photo">
+                        </button>
+                    </div>
+                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                        id="dropdown-user">
+                        <div class="px-4 py-3" role="none">
+                            <p class="text-sm text-gray-900 dark:text-white" role="none">
+                                <!-- {{ Auth()->user()->name ?? 'Guest'}} -->
+                                  My name
+                            </p>
+                            <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                                <!-- {{ Auth()->user()->email ?? 'guest@mail.com'}} -->
+                                  my@email.com
+                            </p>
+                        </div>
+                        <ul class="py-1" role="none">
+                            <li>
+                                <a href="index.html"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    role="menuitem">Dashboard</a>
+                            </li>
+                            <li>
+                                <form method="post" action="{{ route('logout') }}" class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <!-- @csrf -->
+                                    <button type="submit"
+                                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group">
+                                        <div
+                                            lass="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                                            <i class='fa fa-sign-out'></i>
+                                        </div>
+                                        <span class="flex-1 ms-3 whitespace-nowrap">Logout</span>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+
+
+
+<!-- Sidebar -->
+<aside id="logo-sidebar"
+class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+aria-label="Sidebar">
+<div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+
+    <!-- {{-- Start of Sidebar Menu --}} -->
+    <ul class="space-y-2 font-medium mt-2">
+
+        <li class="">
+            <a href="{{ route('dashboard.marketers') }}"
+                class="{{ request()->routeIs('dashboard.marketers') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class='fa fa-pie-chart'></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Dashboard (M+)</span>
+            </a>
+        </li>
+
+        <li class="" title="View products">
+            <a href="{{ route('products.marketers') }}"
+                class="{{ request()->routeIs('products*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class='fa fa-tint'></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Products</span>
+            </a>
+        </li>
+
+        <li class="" title="ATC: Authority To Collect">
+            <a href="{{ route('purchase.marketers') }}"
+                class="{{ request()->routeIs('purchase*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class='fa fa-tint'></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Purchase (ATC)</span>
+            </a>
+        </li>
+
+
+        <li class="">
+            <a href="{{ route('programs.marketers') }}"
+                class="{{ request()->routeIs('programs.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class='fa fa-th-large'></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Programs</span>
+                <span
+                    class="inline-flex items-center justify-center w-3 h-3 p-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full ms-3 dark:bg-blue-900 dark:text-blue-300">
+                    39
+                </span>
+            </a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('customer-assign-program') }}"
+                class="{{ request()->routeIs('customer-assign-program.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                     <i class="fa fa-truck"></i>
+
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Approved Programs</span>
+            </a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('movements.index') }}"
+                class="{{ request()->routeIs('movements.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-gg-circle"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Movements</span>
+                <span
+                    class="inline-flex items-center justify-center w-3 h-3 p-3 text-sm font-medium text-green-800 bg-green-100 rounded-full ms-3 dark:bg-blue-900 dark:text-blue-300">
+                    31
+                </span>
+            </a>
+        </li>
+
+
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-address-card"></i>
+
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Waybill & Tickets</span>
+            </a>
+        </li>
+
+        <hr>
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-users"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
+            </a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-simplybuilt"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Companies</span>
+            </a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-compress"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Transporters</span>
+            </a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-address-card"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Drivers</span>
+            </a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-truck"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Trucks</span>
+            </a>
+        </li>
+
+        <hr>
+
+        <li class="">
+            <a href="{{ route('transactions.index') }}"
+                class="{{ request()->routeIs('transactions.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-exchange"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Transactions</span>
+            </a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-money"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Payments</span>
+            </a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.index*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-bank"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Fund wallet</span>
+            </a>
+        </li>
+
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-credit-card-alt"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Withdraw funds</span>
+            </a>
+        </li>
+
+        <hr>
+        <li>
+            <details class="group ">
+
+                <summary
+                    class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }} 
+                 p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700
+                 flex items-center justify-between gap-2 p-2 font-medium marker:content-none hover:cursor-pointer">
+
+                    <span class="flex gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+
+                        <span>
+                            Recent Documents
+                        </span>
+                    </span>
+                    <svg class="w-5 h-5 text-gray-500 transition group-open:rotate-90"
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
+                        </path>
+                    </svg>
+                </summary>
+
+                <article class="px-4 pb-4">
+                    <ul class="flex flex-col gap-1 pl-2">
+                        <li class="mt-1 p-2 hover:bg-gray-300 dark:hover:bg-gray-700 dark:text-gray-200"><a
+                                href="">Document type ACC1</a></li>
+                        <li class="mt-1 p-2 hover:bg-gray-300 dark:hover:bg-gray-700 dark:text-gray-200"><a
+                                href="">Document type ACC2</a></li>
+                        <li class="mt-1 p-2 hover:bg-gray-300 dark:hover:bg-gray-700 dark:text-gray-200"><a
+                                href="">Document type ACC3</a></li>
+                    </ul>
+                </article>
+
+            </details>
+        </li>
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Messages</span>
+                <span
+                    class="inline-flex items-center justify-center w-3 h-3 p-3 text-sm font-medium text-red-800 bg-red-100 rounded-full ms-3 dark:bg-red-900 dark:text-red-300">
+                    3
+                </span>
+            </a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-question-circle"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Customer Support</span>
+            </a>
+        </li>
+
+
+
+        <hr>
+
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-user"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Profile</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="{{ route('fallback') }}"
+                class="{{ request()->routeIs('fallback.*') ? 'text-white bg-[' . $brand['bg-color'] . ']' : '' }}
+            flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-blue-700 dark:hover:bg-gray-700 group">
+                <div
+                    class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                    <i class="fa fa-gear"></i>
+                </div>
+                <span class="flex-1 ms-3 whitespace-nowrap">Settings</span>
+            </a>
+        </li>
+
+        <li>
+            <form method="post" action="{{ route('logout') }}"
+                class="hover:bg-blue-700 dark:hover:bg-gray-700 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white w-full">
+                <!-- @csrf -->
+                <button type="submit" class="w-100 py-2 flex items-center rounded-lg group">
+                    <div
+                        class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                        <i class='fa fa-sign-out'></i>
+                    </div>
+                    <span class="flex-1 pl-5 whitespace-nowrap">Logout</span>
+                </button>
+            </form>
+        </li>
+    </ul>
+    <!-- End of Sidebar Menu -->
+</div>
+</aside>
+<!-- End Sidebar -->
+
+
+
+
+<!-- Content -->
+     <!-- Container -->
+     <div class="p-4 sm:ml-64">
+
+        <div class="rounded-lg dark:border-gray-700 mt-20">
+
+            <!-- {{-- Information --}} -->
+            <div
+                class="bg-white shadow-lg rounded-lg flex items-center gap-2 p-4 w-full dark:bg-slate-800 dark:text-gray-100">
+                <div class="md:p-2">
+                    <i class="fa fa-truck bg-[#0828b9] p-2 rounded-full md:text-2xl text-white"></i>
+                </div>
+                <div class="sm:p-2 mb-4 md:mb-0">
+                    <h2 class="md:text-xl font-bold mb-2">HUSA Oil Marketer</h2>
+                    <p class="text-gray-700 dark:text-slate-400 mb-1">info@husaaoil.com</p>
+                    <p class="text-gray-500 dark:text-gray-300">No. 54 Rahimi road, Apapa, Lagos State, Nigeria 🇳🇬</p>
+                </div>
+            </div>            
+            
+
+            <!-- {{-- Statistical widge --}} -->
+            <div class="p-6 my-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+
+                <!-- {{-- Session one --}} -->
+                <div class="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4 pb-3">
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"></path>
+                                <path fill-rule="evenodd"
+                                    d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z"
+                                    clip-rule="evenodd"></path>
+                                <path
+                                    d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Total Products
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                12
+                            </h4>
+                        </div>
+                        <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+55%</strong>&nbsp;than last week
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path
+                                    d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Workers
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                230
+                            </h4>
+                        </div>
+                        <div class="border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+3%</strong>&nbsp;than last month
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path
+                                    d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Pending payment
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                3,462
+                            </h4>
+                        </div>
+                        <div class="border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-red-500">-2%</strong>&nbsp;than yesterday
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path
+                                    d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Waybill and Ticket
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                430
+                            </h4>
+                        </div>
+                        <div class="border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+5%</strong>&nbsp;than yesterday
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- {{-- Session two --}} -->
+                <div class="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4 pb-3">
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"></path>
+                                <path fill-rule="evenodd"
+                                    d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z"
+                                    clip-rule="evenodd"></path>
+                                <path
+                                    d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Total Balance (Naira)
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                ₦503k</h4>
+                        </div>
+                        <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+55%</strong>&nbsp;than last week
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path
+                                    d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Liters Purchase (AGO)
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                2,300</h4>
+                        </div>
+                        <div class="border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+3%</strong>&nbsp;than last month
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path
+                                    d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Liters Purchase (PMS)
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                3,462</h4>
+                        </div>
+                        <div class="border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-red-500">-2%</strong>&nbsp;than yesterday
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path
+                                    d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Liters Purchase (ATK)
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                $103,430</h4>
+                        </div>
+                        <div class="border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+5%</strong>&nbsp;than yesterday
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- {{-- Session three --}} -->
+                <div class="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4 pb-3">
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"></path>
+                                <path fill-rule="evenodd"
+                                    d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z"
+                                    clip-rule="evenodd"></path>
+                                <path
+                                    d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Total Balance (Dollar)
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                $503k</h4>
+                        </div>
+                        <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+55%</strong>&nbsp;than last week
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path
+                                    d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Liters Lifted (AGO)
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                2,300</h4>
+                        </div>
+                        <div class="border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+3%</strong>&nbsp;than last month
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path
+                                    d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Liters Lifted (PMS)
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                3,462</h4>
+                        </div>
+                        <div class="border-t border-blue-gray-50 p-4">
+                            <p
+                                class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-red-500">-2%</strong>&nbsp;than yesterday
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true" class="w-6 h-6 text-white">
+                                <path
+                                    d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Liters Lifted (ATK)
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                $103,430</h4>
+                        </div>
+                        <div class="border-t border-blue-gray-50 p-4">
+                            <p
+                                class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+5%</strong>&nbsp;than yesterday
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+ <!-- End Content -->
+
+
+
+<!-- Footer -->
+
+    <!-- Flowbite Javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+
+    <!-- Flowbite ApexCharts Cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
+    <!-- Start Table - https://www.tailwindtoolbox.com/components/responsive-table -->
+	<!-- jQuery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!--Datatables -->
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+	<script>
+		$(document).ready(function() {
+
+			var table = $('#example').DataTable({
+					responsive: true
+				})
+				.columns.adjust()
+				.responsive.recalc();
+		});
+	</script>
+    <!-- End Table -->
+
+</body>
+</html>
+<!-- End Footer -->
